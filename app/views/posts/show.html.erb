@@ -1,0 +1,63 @@
+<%= render "posts/navbar" %>
+
+<div class="container" >
+  <h1 class="text-center mt-4">Posts</h1>
+  <div class="container"  style="padding-top:20px">
+    </div>
+  <p> Search for posts </p>
+</div>
+
+   <div class="container">
+    <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div> 
+
+  <div class="container" style="padding-top:30px">
+    <div class="border rounded">
+        <div class="card-body" style="text-align:center">
+              <a href="/"> <h5 class="card-title"><%=@post.title%></h5> </a>
+              <p class="card-text"><%=@post.body%></p>
+              <p class="card-text"> <span class="card-text"><%=@post.author%></span> | <span class="card-text"><%=@post.likes%></span> likes. </p>
+              <a href="#" class="btn btn-primary">Like</a>
+            </div>
+        </div>
+</div>
+
+<div class="container">
+  &nbsp
+  <p> Comments : </p>
+
+  <%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<% @post.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+
+  <%= link_to "Destroy", [comment.post, comment], data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, class: "btn btn-danger" %>
+<% end %>
+
+  </div>

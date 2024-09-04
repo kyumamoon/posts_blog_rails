@@ -1,0 +1,46 @@
+<%= render "posts/navbar" %>
+
+<div class="container" >
+  <h1 class="text-center mt-4">Create a new post</h1>
+  <div class="container"  style="padding-top:20px">
+</div>
+</div>
+
+<% if @post.errors.any?%> 
+
+    <div class="container">
+    <p> ERROR </p>
+    </div>
+
+<%else%>
+
+<%= form_with model: @post do |form| %>
+  <div class="container">
+      <!-- <label for="title" class="form-label">Title</label> -->
+      <%= form.label :title, class:"form-label" %>
+
+      <!-- <input type="title" id="title1" class="form-control" aria-describedby="titleBlock"> -->
+      <%= form.text_field :title, class:"form-control",id:"title1" %>
+
+      <!-- <label for="author" class="form-label">Author</label> -->
+      <%= form.label :author, class:"form-label",for:"author" %>
+
+      <!-- <input type="author" id="author1" class="form-control" aria-describedby="titleBlock"> -->
+      <%= form.text_field :author, class:"form-control",id:"author1" %>
+
+      <!-- <label for="body" class="form-label">Body</label> -->
+      <%= form.label :body, class:"form-label", for:"body"%>
+
+      <!-- <textarea class="form-control" id="body1" rows="5"></textarea> -->
+      <%= form.text_area :body,rows:10, class:"form-control",id:"body1"%>
+
+      <div style="padding-top:20px">
+      <%= form.submit class:"btn btn-secondary"%>
+      </div>
+  </div>
+<%end%>
+
+<% end %>
+
+
+

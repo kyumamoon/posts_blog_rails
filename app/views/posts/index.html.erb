@@ -1,0 +1,39 @@
+
+<%= render "posts/navbar" %>
+
+<div class="container" >
+  <h1 class="text-center mt-4">Posts</h1>
+  <div class="container"  style="padding-top:20px">
+    </div>
+  <p> Search for posts </p>
+</div>
+
+   <div class="container">
+    <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div> 
+
+<div class="container" style="padding-top:30px">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+      <%@post.each do |item| %>
+        <div class="col">
+          <div class="card" style="width: 20rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <a href="posts/<%=item.id%>"> <h5 class="card-title"><%=item.title%></h5> </a>
+              <p class="card-text"><%=item.body%></p>
+              <p class="card-text"> <span class="card-text"><%=item.author%></span> | <span class="card-text"><%=item.likes%></span> likes. </p>
+              <a href="posts/updateLike/<%=item.id%>" class="btn btn-primary">Like</a>
+              <a href="posts/edit/<%=item.id%>" class="btn btn-secondary">Edit</a>
+              <%= link_to "Destroy", destroyer_path(item.id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+</div>
